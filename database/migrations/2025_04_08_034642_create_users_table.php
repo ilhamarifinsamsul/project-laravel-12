@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('username')->unique()->nullable();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->enum('role', ['admin', 'user'])->default('user');
+            // $table->timestamp('email_verified_at')->nullable();
+            $table->foreignId('role_id')->nullable()->constrained('roles')->onUpdate('SET NULL')->onDelete('CASCADE');
             $table->string('password');
-            $table->rememberToken();
+            // $table->rememberToken();
             $table->timestamps();
         });
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Seeders\RoleSeeder;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -19,8 +20,10 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
+        'username',
         'name',
         'email',
+        'role_id',
         'password',
     ];
 
@@ -49,5 +52,9 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    function role(){
+        return $this->belongsTo(Roles::class, 'role_id', 'id');
     }
 }
