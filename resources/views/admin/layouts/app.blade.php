@@ -87,6 +87,7 @@
     <!-- JQuery JS -->
     <script src="{{ asset('assets/asset/vendor/jquery/jquery.min.js') }}"></script>
 
+    @yield('script')
 
 </body>
 
