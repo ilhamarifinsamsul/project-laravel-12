@@ -52,18 +52,20 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="utilities-color.html">Colors</a>
-                <a class="collapse-item" href="cards.html">Cards</a>
+                <a class="collapse-item nav-link" href="utilities-color.html">Colors</a>
+                <a class="collapse-item nav-link" href="cards.html">Cards</a>
             </div>
         </div>
     </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+    <li class="nav-item">
+        <a href="{{ route('auth.logout') }}" class="nav-link">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </a>
+    </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
+    
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
