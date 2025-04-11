@@ -86,6 +86,7 @@
     <script src="{{ asset('assets/asset/vendor/datatables/jquery.dataTables.min.js') }}"></script>
     <!-- JQuery JS -->
     <script src="{{ asset('assets/asset/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @yield('script')
 
