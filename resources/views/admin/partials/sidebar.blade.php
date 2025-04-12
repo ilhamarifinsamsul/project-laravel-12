@@ -53,7 +53,7 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item nav-link {{ request()->path() == '/category' }}" href="{{ route('category.index') }}">Category</a>
-                <a class="collapse-item nav-link" href="#">Products</a>
+                <a class="collapse-item nav-link {{ request()->path() == '/products' }}" href="{{ route('products.index') }}">Products List</a>
             </div>
         </div>
     </li>
