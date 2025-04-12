@@ -19,15 +19,17 @@
                     <a href="{{ route('category.create') }}" class="btn btn-primary">Add Category</a>
                 </div>
                 <div class="card-body">
-                    <div class="input-group">
-                        <input type="text" class="form-control bg-light border-2 small mb-4"
+                    <form action="{{ route('category.index') }}" method="GET">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-2 small mb-4"
                             placeholder="Search for..." name="search" value="{{ $search }}">
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-primary mb-4" >
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary mb-4" >
                                 <i class="fas fa-search fa-sm"></i>
-                            </button>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                     <div class="table-responsive">
                         <table class="table" id="dataTable">
                             <thead>
