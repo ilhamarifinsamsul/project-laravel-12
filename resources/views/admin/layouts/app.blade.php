@@ -87,6 +87,7 @@
     <!-- JQuery JS -->
     <script src="{{ asset('assets/asset/vendor/jquery/jquery.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
 
     @yield('script')
 
