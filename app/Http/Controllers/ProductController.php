@@ -89,4 +89,13 @@ class ProductController extends Controller
         // redirect to index
         return redirect()->route('products.index')->with('success', 'Category created successfully');
     }
+
+    public function show (string $id) : View 
+    {
+        // get product by id
+        $product = Products::findOrFail($id);
+
+        // return view
+        return view('admin.products.show', compact('product'));
+    }
 }
