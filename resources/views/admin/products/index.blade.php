@@ -54,7 +54,7 @@
                                             {{ $p->category->name }}
                                         </td>
                                         <td class="text-center">
-                                            <img src="{{ asset('/storage/products' . $p->image) }}" class="rounded" style="width: 100px" alt="Product Image">
+                                            <img src="{{ asset('storage/products/'.$p->image) }}" class="rounded" style="width: 100px" alt="Product Image">
                                         </td>
                                         <td>{{ $p->title }}</td>
                                         <td>{{ "Rp " . number_format($p->price,2,',','.') }}</td>
@@ -62,8 +62,8 @@
                                         <td class="text-center">
 
                                             <form onsubmit="return confirm('Apakah anda yakin?')" action="{{ route('products.destroy', $p->id) }}" method="POST" enctype="multipart/form-data">
-                                                <a class="'btn btn-warning btn-sm mb-2" href="{{ route('products.edit', $p->id) }}" ><i class="fas fa-pen-fancy"></i></a>
-                                                <a href="{{ route('products.show', $p->id) }}" class="btn btn-sm btn-secondary"><i class="fas fa-eye"></i></a>
+                                                <a class="btn btn-warning btn-sm mb-2" href="{{ route('products.edit', $p->id) }}" ><i class="fas fa-pen"></i></a>
+                                                <a class="btn btn-secondary btn-sm mb-2" href="{{ route('products.show', $p->id) }}"><i class="fas fa-eye"></i></a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm mb-2"><i
