@@ -5,7 +5,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item active text-sm" aria-current="page">Product</li>
         <li class="breadcrumb-item active text-sm" aria-current="page">Products List</li>
-        <li class="breadcrumb-item active text-sm" aria-current="page">Show</li>
+        <li class="breadcrumb-item active text-sm" aria-current="page">Detail</li>
     </ol>
 </nav>
 @endsection
