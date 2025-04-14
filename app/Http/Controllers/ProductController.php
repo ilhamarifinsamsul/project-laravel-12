@@ -27,9 +27,18 @@ class ProductController extends Controller
         $search = request()->query('search');
 
         // 
-        $products = Products::when($search, function($query) use ($search) {
-            $query->where('title', 'like', '%' . $search . '%');
-        })->latest()->paginate(5)->appends(['search' => $search]);
+        $products = Products::with('category') // Eager load relationship
+        ->when($search, function($query) use ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('products.title', 'like', '%' . $search . '%')
+                  ->orWhereHas('category', function($q) use ($search) {
+                      $q->where('name', 'like', '%' . $search . '%');
+                  });
+            });
+        })
+        ->latest()
+        ->paginate(5)
+        ->appends(['search' => $search]);
 
         // return view
         return view('admin.products.index', compact('products', 'search'));
