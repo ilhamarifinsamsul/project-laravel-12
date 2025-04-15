@@ -164,5 +164,19 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Products updated successfully');
     }
 
+    public function destroy($id) : RedirectResponse
+    {
+        // get product by id
+        $product = Products::findOrFail($id);
+
+        // delete image
+        Storage::delete('products/' . $product->image);
+
+        // delete product
+        $product->delete();
+
+        return redirect()->route('products.index')->with('success', 'Products deleted successfully');
+    }
+
 
 }
