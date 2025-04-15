@@ -31,9 +31,9 @@ class ProductController extends Controller
         ->when($search, function($query) use ($search) {
             $query->where(function($q) use ($search) {
                 $q->where('products.title', 'like', '%' . $search . '%')
-                  ->orWhereHas('category', function($q) use ($search) {
-                      $q->where('name', 'like', '%' . $search . '%');
-                  });
+                ->orWhereHas('category', function($q) use ($search) {
+                    $q->where('name', 'like', '%' . $search . '%');
+                });
             });
         })
         ->latest()
@@ -98,4 +98,18 @@ class ProductController extends Controller
         // return view
         return view('admin.products.show', compact('product'));
     }
+
+    public function edit(string $id) : View
+    {
+        $product =  Products::findOrFail($id);
+        $category = Category::all();
+
+        return view('admin.products.edit', compact('product', 'category'));
+    }
+
+    /**
+     * 
+     */
+
+
 }
