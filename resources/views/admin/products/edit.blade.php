@@ -48,7 +48,6 @@
                                     @if ($product->image)
                                         <div class="mt-2">
                                             <img src="{{ asset('storage/products/'. $product->image) }}" alt="product image" style="max-width: 150px">
-                                            <p class="text-muted">Current Image</p>
                                         </div>
                                     @endif
                                 </div>
@@ -76,8 +75,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="price">Price</label>
-                                            <input type="number" name="price" id="price" class="form-control @error('price') is-invalid
-                                        @enderror" value="{{ old('price', $product->price) }}">
+                                            <input type="number" name="price" id="price" class="form-control @error('price') is-invalid @enderror" value="{{ old('price', $product->price) }}">
                                         </div>
                                         @error('price')
                                         <p class="text-danger">{{ $message }}</p>

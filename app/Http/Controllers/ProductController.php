@@ -13,6 +13,7 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -87,7 +88,7 @@ class ProductController extends Controller
         ]);
 
         // redirect to index
-        return redirect()->route('products.index')->with('success', 'Category created successfully');
+        return redirect()->route('products.index')->with('success', 'Products created successfully');
     }
 
     public function show (string $id) : View 
@@ -109,7 +110,59 @@ class ProductController extends Controller
 
     /**
      * 
+     * update
+     * @param mixed $request
+     * @param mixed $id
+     * @return RedirectResponse
      */
+
+    public function update(Request $request, $id) : RedirectResponse
+    {
+        // validate form
+        $request->validate([
+            'category_id' => 'required|exists:category,id',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+            'title' => 'required|min:5',
+            'description' => 'required|min:10',
+            'price' => 'required|numeric',
+            'stock' => 'required|numeric'
+        ]);
+        
+        // get pruduct by id
+        $product = Products::findOrFail($id);
+
+        // check image is uploaded
+        if ($request->hasFile('image')) {
+            // delete old image
+            Storage::delete('products/' . $product->image);
+
+            // upload new image
+            $image = $request->file('image');
+            $image->storeAs('products', $image->hashName());
+
+            // update product with new image
+            $product->update([
+                'category_id' => $request->category_id,
+                'image' => $image->hashName(),
+                'title' => $request->title,
+                'description' => $request->description,
+                'price' => $request->price,
+                'stock' => $request->stock
+            ]);
+        } else {
+            // update product without image
+            $product->update([
+                'category_id' => $request->category_id,
+                'title' => $request->title,
+                'description' => $request->description,
+                'price' => $request->price,
+                'stock' => $request->stock
+            ]);
+        }
+
+        // redirect to index
+        return redirect()->route('products.index')->with('success', 'Products updated successfully');
+    }
 
 
 }
