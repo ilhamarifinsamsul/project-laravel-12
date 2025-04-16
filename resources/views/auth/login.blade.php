@@ -73,7 +73,7 @@
                                 <a class="small" href="forgot-password.html">Forgot Password?</a>
                             </div>
                             <div class="text-center">
-                                <a class="small" href="#">Create an Account!</a>
+                                <a class="small" href="{{ route('auth.register') }}">Create an Account!</a>
                             </div>
                         </div>
                     </div>
@@ -93,6 +93,32 @@
 
     <!-- Custom scripts for all pages-->
     <script src="../assets/asset/js/sb-admin-2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    
+    <script>
+    //message with sweetalert
+    @if(session('success'))
+        Swal.fire({
+            icon: "success",
+            title: "BERHASIL",
+            text: "{{ session('success') }}",
+            showConfirmButton: false,
+            timer: 2000
+        });
+    @elseif(session('error'))
+        Swal.fire({
+            icon: "error",
+            title: "GAGAL!",
+            text: "{{ session('error') }}",
+            showConfirmButton: false,
+            timer: 2000
+        });
+    @endif
+
+    </script>
+    
+
 
 </body>
 

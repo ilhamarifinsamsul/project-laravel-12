@@ -16,6 +16,38 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
+    // show register form
+    public function showRegisterForm() : View
+    {
+        return view('auth.register');
+    }
+
+    // Registration process
+    public function register(Request $request)
+    {
+        // validate the process
+        $request->validate([
+            'username' => 'required|string|max:100|unique:users',
+            'name' => 'required|string|max:100',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'role_id' => 'required|integer'
+        ]);
+
+        // create the users
+        $user = User::create([
+            'username' => $request->username,
+            'name' => $request->name,
+            'email' => $request->email,
+            'role_id' => $request->role_id,
+            'password' => Hash::make($request->password)
+        ]);
+
+        Auth::login($user);
+
+        return redirect()->route('auth.login')->with('success', 'Registration on successful');
+    }
+
     // Login process
     public function login(Request $request)
     {
