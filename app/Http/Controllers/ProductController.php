@@ -46,6 +46,29 @@ class ProductController extends Controller
 
     }
 
+    public function frontend() : View 
+    {
+    // get all products & search
+    $search = request()->query('search');
+
+    // get all products
+    $products = Products::with('category') // Eager load relationship
+        ->when($search, function($query) use ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('products.title', 'like', '%' . $search . '%')
+                ->orWhereHas('category', function($q) use ($search) {
+                    $q->where('name', 'like', '%' . $search . '%');
+                });
+            });
+        })
+        ->latest()
+        ->paginate(6)
+        ->appends(['search' => $search]);
+
+    // return view
+    return view('frontend.layouts.app', compact('products', 'search'));
+    }
+
     /**
      * create
      * 

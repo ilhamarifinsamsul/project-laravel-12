@@ -6,8 +6,11 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('auth.login');;
+    return view('frontend.layouts.app');
 });
+
+Route::get('/', [ProductController::class, 'frontend'])->name('home');
+Route::get('/products', [ProductController::class, 'frontend'])->name('products.frontend');
 
 Route::controller(LoginController::class)->prefix("auth")->name('auth.')->group(function(){
     Route::get('/login', 'showLoginForm')->name('login');
